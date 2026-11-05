@@ -53,7 +53,7 @@
 #define USE_MAX7456
 #define MAX7456_SPI_BUS         BUS_SPI1
 #define MAX7456_CS_PIN          PC14
-#define MAX7456_SPI_SPEED       BUS_SPEED_SLOW
+#define MAX7456_SPI_SPEED       BUS_SPEED_INITIALIZATION
 
 // *************** SPI2 Gyro & ACC ******************
 #define USE_SPI_DEVICE_2
