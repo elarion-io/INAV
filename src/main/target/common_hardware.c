@@ -149,6 +149,30 @@
     #endif
 #endif
 
+#if defined(USE_BARO_BMP581)
+    #if defined(BMP581_I2C_BUS) || defined(BARO_I2C_BUS)
+      #if !defined(BMP581_I2C_BUS)
+        #define BMP581_I2C_BUS BARO_I2C_BUS
+      #endif
+      #if !defined(BMP581_I2C_ADDR)
+        #define BMP581_I2C_ADDR (0x46)
+      #endif
+      BUSDEV_REGISTER_I2C(busdev_bmp581,    DEVHW_BMP581,       BMP581_I2C_BUS,     BMP581_I2C_ADDR,    NONE,           DEVFLAGS_NONE,      0);
+    #endif
+#endif
+
+#if defined(USE_BARO_LPS22HB)
+    #if defined(LPS22HB_I2C_BUS) || defined(BARO_I2C_BUS)
+      #if !defined(LPS22HB_I2C_BUS)
+        #define LPS22HB_I2C_BUS BARO_I2C_BUS
+      #endif
+      #if !defined(LPS22HB_I2C_ADDR)
+        #define LPS22HB_I2C_ADDR (0x5C)
+      #endif
+      BUSDEV_REGISTER_I2C(busdev_lps22hb,   DEVHW_LPS22HB,      LPS22HB_I2C_BUS,    LPS22HB_I2C_ADDR,   NONE,           DEVFLAGS_NONE,      0);
+    #endif
+#endif
+
 #if defined(USE_BARO_MS5607)
     #if !defined(MS5607_I2C_BUS)
         #define MS5607_I2C_BUS BARO_I2C_BUS
