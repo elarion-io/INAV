@@ -1,0 +1,51 @@
+name: Elarion Release
+
+on:
+  push:
+    tags:
+      - '[0-9]*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get -y install ninja-build
+
+      - uses: actions/cache@v4
+        with:
+          path: downloads
+          key: ${{ runner.os }}-downloads-${{ hashFiles('CMakeLists.txt') }}-${{ hashFiles('**/cmake/*') }}
+
+      - name: Build firmware
+        run: |
+          mkdir -p build && cd build
+          cmake -DWARNINGS_AS_ERRORS=ON -DMAIN_COMPILE_OPTIONS=-pipe -G Ninja ..
+          ninja -j$(nproc) ELARIONH743 ELARIONH743SD ELARIONF405
+
+      - name: Package
+        run: |
+          mkdir -p dist
+          cp build/*.hex dist/
+          cd dist
+          sha256sum *.hex > SHA256SUMS.txt
+          zip -9 "inav-elarion-${GITHUB_REF_NAME}.zip" *.hex SHA256SUMS.txt
+          ls -l
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: elarion-firmware
+          path: dist/
+          if-no-files-found: error
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes "" dist/*
