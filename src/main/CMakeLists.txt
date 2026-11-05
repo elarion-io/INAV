@@ -152,6 +152,8 @@ main_sources(COMMON_SRC
     drivers/compass/compass_ist8310.h
     drivers/compass/compass_lis3mdl.c
     drivers/compass/compass_lis3mdl.h
+    drivers/compass/compass_lis2mdl.c
+    drivers/compass/compass_lis2mdl.h
     drivers/compass/compass_mag3110.c
     drivers/compass/compass_mag3110.h
     drivers/compass/compass_mpu9250.c

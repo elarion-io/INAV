@@ -286,6 +286,13 @@
 //  BUSDEV_REGISTER_I2C(busdev_lis3mdl,     DEVHW_LIS3MDL,      LIS3MDL_I2C_BUS,    0x1C,               NONE,           DEVFLAGS_NONE);
 #endif
 
+#if defined(USE_MAG_LIS2MDL)
+    #if !defined(LIS2MDL_I2C_BUS)
+        #define LIS2MDL_I2C_BUS MAG_I2C_BUS
+    #endif
+    BUSDEV_REGISTER_I2C(busdev_lis2mdl,     DEVHW_LIS2MDL,      LIS2MDL_I2C_BUS,    0x1E,               NONE,           DEVFLAGS_NONE,  0);
+#endif
+
 #if defined(USE_MAG_IST8310)
     #if !defined(IST8310_I2C_BUS)
         #define IST8310_I2C_BUS MAG_I2C_BUS
