@@ -1,0 +1,2 @@
+target_stm32h743xi(ELARIONH743)
+target_stm32h743xi(ELARIONH743SD)
