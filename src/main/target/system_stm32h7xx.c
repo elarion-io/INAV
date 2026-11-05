@@ -271,7 +271,7 @@ static void SystemClockHSE_Config(void)
     /* -2- Enable HSE  Oscillator, select it as PLL source and finally activate the PLL */
 
 #define USE_H7_HSERDY_SLOW_WORKAROUND
-#ifdef USE_H7_HSERDY_SLOW_WORKAROUND
+#if defined(USE_H7_HSERDY_SLOW_WORKAROUND) && !defined(USE_HSE_BYPASS)
 
     // With reference to 2.3.22 in the ES0250 Errata for the L476.
     // Applying the same workaround here in the vain hopes that it improves startup times.
@@ -291,7 +291,11 @@ static void SystemClockHSE_Config(void)
 #endif
 
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+#ifdef USE_HSE_BYPASS
+    RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
+#else
     RCC_OscInitStruct.HSEState = RCC_HSE_ON; // Even Nucleo-H473 work without RCC_HSE_BYPASS
+#endif
 
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;

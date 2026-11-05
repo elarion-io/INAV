@@ -96,6 +96,9 @@ struct {
     // Zbit ZB25VQ128
     // Datasheet: http://zbitsemi.com/upload/file/20201010/20201010174048_82182.pdf
     {0x5E4018, 256, 256},
+    // GigaDevice GD25Q128E
+    // Datasheet: https://www.gigadevice.com/product/flash/product-series/spi-nor-flash/gd25q128e
+    {0xC84018, 256, 256},
     // Winbond W25Q128_DTR
     // Datasheet: https://www.winbond.com/resource-files/w25q128jv%20dtr%20revb%2011042016.pdf
     {0xEF7018, 256, 256},
