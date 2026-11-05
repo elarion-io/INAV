@@ -62,12 +62,12 @@
 #define SPI2_MOSI_PIN           PB15
 
 #define USE_IMU_LSM6DXX
-#define IMU_LSM6DXX_ALIGN       CW0_DEG_FLIP
+#define IMU_LSM6DXX_ALIGN       CW180_DEG_FLIP
 #define LSM6DXX_SPI_BUS         BUS_SPI2
 #define LSM6DXX_CS_PIN          PC10
 
 #define USE_IMU_ICM42605
-#define IMU_ICM42605_ALIGN      CW0_DEG_FLIP
+#define IMU_ICM42605_ALIGN      CW180_DEG_FLIP
 #define ICM42605_SPI_BUS        BUS_SPI2
 #define ICM42605_CS_PIN         PC3
 
